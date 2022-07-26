@@ -7,7 +7,7 @@ import tensorflow as tf
 import numpy as np
 
 
-flags.DEFINE_string('dataset_path', './data/widerface/train',
+flags.DEFINE_string('dataset_path', './data/WIDER_train/',
                     'path to dataset')
 flags.DEFINE_string('output_path', './data/widerface_train_bin.tfrecord',
                     'path to ouput tfrecord')

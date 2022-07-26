@@ -12,7 +12,7 @@ using_flip: True
 using_distort: True
 
 # testing dataset
-testing_dataset_path: './data/widerface/val'
+testing_dataset_path: './data/WIDER_val'
 
 # network
 out_channel: 64
