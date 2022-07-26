@@ -1,6 +1,6 @@
 # clone repo
 
-git clone https://github.com/Shankhanil/retinaface-tf2.git
+# git clone https://github.com/Shankhanil/retinaface-tf2.git
 
 # create dataset
 !unzip -n /content/drive/MyDrive/WIDER_DATASET/WIDER_train.zip -d /content/retinaface-tf2/data
