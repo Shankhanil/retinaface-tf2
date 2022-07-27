@@ -37,7 +37,6 @@ def main(_):
                               show_shapes=True,
                               show_layer_names=True)
 
-    '''
     # define prior box
     priors = prior_box((cfg['input_size'], cfg['input_size']),
                        cfg['min_sizes'],  cfg['steps'], cfg['clip'])
@@ -125,7 +124,6 @@ def main(_):
     manager.save()
     print("\n[*] training done! save ckpt file at {}".format(
         manager.latest_checkpoint))
-    '''
 
 
 if __name__ == '__main__':
