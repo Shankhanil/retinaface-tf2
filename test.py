@@ -75,14 +75,15 @@ def main(_argv):
         print("[*] Processing on single image {}".format(FLAGS.img_path))
 
         img_raw = cv2.imread(FLAGS.img_path)
-        img = resize_preserving_aspect_ratio(img_raw, 640)
-        img_height_raw, img_width_raw, _ = img.shape
-        img = np.float32(img.copy())
+        # img = resize_preserving_aspect_ratio(img_raw, 640)
+        img_height_raw, img_width_raw, _ = img_raw.shape
+        img = np.float32(img_raw.copy())
 
         if FLAGS.down_scale_factor < 1.0:
             img = cv2.resize(img, (0, 0), fx=FLAGS.down_scale_factor,
                              fy=FLAGS.down_scale_factor,
                              interpolation=cv2.INTER_LINEAR)
+        img = resize_preserving_aspect_ratio(img, 640)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
         # pad input image to avoid unmatched shape problem
