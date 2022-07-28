@@ -20,6 +20,25 @@ flags.DEFINE_float('iou_th', 0.4, 'iou threshold for nms')
 flags.DEFINE_float('score_th', 0.5, 'score threshold for nms')
 flags.DEFINE_float('down_scale_factor', 1.0, 'down-scale factor for inputs')
 
+def resize_preserving_aspect_ratio(img, shape: int):
+    """
+    Returns the image with its aspect ratio maintained.
+    For instance, if the shape is 512 then an image with resolution 1000x2000 will be returned as 256X512 instead of 512x512
+    """
+    height, width = img.shape[:2]
+
+    if height == 0 or width == 0:
+        return None
+    if width < height:
+        width = int((width / height) * shape)
+        height = shape
+    else:
+        height = int((height / width) * shape)
+        width = shape
+
+    img = cv2.resize(img, (width, height))
+    return img
+
 
 def main(_argv):
     # init
@@ -56,8 +75,9 @@ def main(_argv):
         print("[*] Processing on single image {}".format(FLAGS.img_path))
 
         img_raw = cv2.imread(FLAGS.img_path)
-        img_height_raw, img_width_raw, _ = img_raw.shape
-        img = np.float32(img_raw.copy())
+        img = resize_preserving_aspect_ratio(img_raw, 640)
+        img_height_raw, img_width_raw, _ = img.shape
+        img = np.float32(img.copy())
 
         if FLAGS.down_scale_factor < 1.0:
             img = cv2.resize(img, (0, 0), fx=FLAGS.down_scale_factor,
