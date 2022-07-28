@@ -83,7 +83,7 @@ def main(_argv):
             img = cv2.resize(img, (0, 0), fx=FLAGS.down_scale_factor,
                              fy=FLAGS.down_scale_factor,
                              interpolation=cv2.INTER_LINEAR)
-        img = resize_preserving_aspect_ratio(img, 640)
+        img = resize_preserving_aspect_ratio(img, 800)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
         # pad input image to avoid unmatched shape problem
