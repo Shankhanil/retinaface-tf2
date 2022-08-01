@@ -15,6 +15,9 @@ flags.DEFINE_string('cfg_path', './configs/retinaface_mbv2.yaml',
                     'config file path')
 flags.DEFINE_string('gpu', '0', 'which gpu to use')
 
+# get 
+flags.DEFINE_integer('epochs', 5,'Epochs to train')
+
 
 def main(_):
     # init
@@ -93,7 +96,7 @@ def main(_):
     # training loop
     summary_writer = tf.summary.create_file_writer('./logs/' + cfg['sub_name'])
     remain_steps = max(
-        steps_per_epoch * cfg['epoch'] - checkpoint.step.numpy(), 0)
+        steps_per_epoch * FLAGS.epochs - checkpoint.step.numpy(), 0)
     prog_bar = ProgressBar(steps_per_epoch,
                            checkpoint.step.numpy() % steps_per_epoch)
 
@@ -104,7 +107,7 @@ def main(_):
         total_loss, losses = train_step(inputs, labels)
 
         prog_bar.update("epoch={}/{}, loss={:.4f}, lr={:.1e}".format(
-            ((steps - 1) // steps_per_epoch) + 1, cfg['epoch'],
+            ((steps - 1) // steps_per_epoch) + 1, FLAGS.epochs,
             total_loss.numpy(), optimizer.lr(steps).numpy()))
 
         if steps % 10 == 0:

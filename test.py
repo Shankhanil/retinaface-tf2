@@ -90,6 +90,7 @@ def main(_argv):
         img, pad_params = pad_input_image(img, max_steps=max(cfg['steps']))
 
         # run model
+        model_time = time.time()
         outputs = model(img[np.newaxis, ...]).numpy()
 
         # recover padding effect
@@ -102,7 +103,8 @@ def main(_argv):
                             img_width_raw)
             cv2.imwrite(save_img_path, img_raw)
         print(f"[*] save result at {save_img_path}")
-
+        print(f"time taken {time.time() - model_time}")
+        
     else:
         cam = cv2.VideoCapture(0)
 

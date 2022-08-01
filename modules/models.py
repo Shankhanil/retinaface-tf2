@@ -1,6 +1,7 @@
+from cv2 import BackgroundSubtractorKNN
 import tensorflow as tf
 from tensorflow.keras import Model
-from tensorflow.keras.applications import MobileNetV2, ResNet50
+from tensorflow.keras.applications import MobileNetV2, ResNet50, EfficientNetB0
 from tensorflow.keras.layers import Input, Conv2D, ReLU, LeakyReLU
 from modules.anchor import decode_tf, prior_box_tf
 
@@ -40,6 +41,14 @@ def Backbone(backbone_type='ResNet50', use_pretrain=True):
         weights = 'imagenet'
 
     def backbone(x):
+        if backbone_type == 'EfficientNet':
+            extractor = EfficientNetB0(input_shape=x.shape[1:], include_top=False, weights=weights)
+
+            # pick layers = ??
+            
+            preprocess = tf.keras.applications.EfficientNetB0.preprocess_input
+
+            
         if backbone_type == 'ResNet50':
             extractor = ResNet50(
                 input_shape=x.shape[1:], include_top=False, weights=weights)
