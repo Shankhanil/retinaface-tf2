@@ -35,7 +35,8 @@ def main(_):
     # define network
     model = RetinaFaceModel(cfg, training=True)
     print(model.summary(line_length=80))
-    
+    if not FLAGS.to_train:
+        exit(0)
     tf.keras.utils.plot_model(model,
                               to_file='RetinaFace_MobileNetV2.png',
                               show_shapes=True,
