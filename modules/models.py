@@ -42,7 +42,7 @@ def Backbone(backbone_type='ResNet50', use_pretrain=True):
         weights = 'imagenet'
 
     def backbone(x):
-        if backbone_type == 'EfficientNet':
+        if backbone_type == 'EfficientNetB0':
             extractor = EfficientNetB0(input_shape=x.shape[1:], include_top=False, weights=weights)
 
             # pick layers = ??
