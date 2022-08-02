@@ -52,6 +52,7 @@ def Backbone(backbone_type='ResNet50', use_pretrain=True):
             print(extractor)
 
             # preprocess = tf.keras.applications.EfficientNetB0.preprocess_input
+            
             preprocess = tf.keras.applications.efficientnet.preprocess_input
 
             
