@@ -51,7 +51,8 @@ def Backbone(backbone_type='ResNet50', use_pretrain=True):
             # pick_layer3 = 174  # [20, 20, 2048]
             print(extractor)
 
-            preprocess = tf.keras.applications.EfficientNetB0.preprocess_input
+            # preprocess = tf.keras.applications.EfficientNetB0.preprocess_input
+            preprocess = tf.keras.applications.efficientnet.preprocess_input
 
             
         if backbone_type == 'ResNet50':
