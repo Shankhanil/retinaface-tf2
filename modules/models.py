@@ -1,3 +1,4 @@
+from tarfile import ExtractError
 from cv2 import BackgroundSubtractorKNN
 import tensorflow as tf
 from tensorflow.keras import Model
@@ -45,7 +46,11 @@ def Backbone(backbone_type='ResNet50', use_pretrain=True):
             extractor = EfficientNetB0(input_shape=x.shape[1:], include_top=False, weights=weights)
 
             # pick layers = ??
-            
+            # pick_layer1 = 80  # [80, 80, 512]
+            # pick_layer2 = 142  # [40, 40, 1024]
+            # pick_layer3 = 174  # [20, 20, 2048]
+            print(extractor)
+
             preprocess = tf.keras.applications.EfficientNetB0.preprocess_input
 
             

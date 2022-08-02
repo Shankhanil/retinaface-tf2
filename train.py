@@ -17,6 +17,7 @@ flags.DEFINE_string('gpu', '0', 'which gpu to use')
 
 # get 
 flags.DEFINE_integer('epochs', 5,'Epochs to train')
+flags.DEFINE_bool('to_train', True,'Do you wanna train or debug? False to debug')
 
 
 def main(_):
